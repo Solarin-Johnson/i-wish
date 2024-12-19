@@ -1,6 +1,11 @@
+@use "@/styles/mixin" as *;
+
 :root {
   --wish-col: repeat(2, 1fr);
   --wish-marg: 32px;
+  --color-p-1-display: flex;
+  --color-p-2-display: none;
+  --preview-display: none;
 }
 
 .new {
@@ -32,14 +37,64 @@
 .wish {
   &-form {
     display: grid;
+    row-gap: 16px;
+
+    .color-picker {
+      display: var(--color-p-1-display);
+    }
+
+    .area {
+      display: grid;
+      background-color: rgba(var(--text-color), 0.06);
+      padding: 14px;
+      row-gap: 14px;
+      border-radius: 10px;
+    }
 
     textarea {
       font-family: inherit;
-      font-size: clamp(18px, 1vw, 21px);
+      font-size: clamp(16.5px, 0.5vw, 8px);
       font-weight: 500;
-      padding: 8px;
       resize: none;
       outline: none;
+      background-color: transparent;
+      border: none;
+    }
+
+    .button {
+      display: flex;
+      gap: 14px;
+
+      button {
+        @include resetDefault();
+        cursor: pointer;
+        width: 100%;
+        padding: 14px 12px;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 500;
+        color: #ffffff;
+        @include pressFeedback();
+
+        &[type="submit"] {
+          background-color: rgba(var(--primary-color));
+        }
+        &[type="button"] {
+          display: var(--preview-display);
+          background-color: rgba(var(--text-color));
+          color: rgba(var(--bg-color));
+          font-weight: 520;
+        }
+      }
+    }
+  }
+
+  &-preview {
+    display: grid;
+    align-content: start;
+
+    .color-picker {
+      display: var(--color-p-2-display);
     }
   }
 }
@@ -48,5 +103,8 @@
   :root {
     --wish-col: repeat(2, 100vw);
     --wish-marg: 20px;
+    --color-p-1-display: none;
+    --color-p-2-display: flex;
+    --preview-display: block;
   }
 }

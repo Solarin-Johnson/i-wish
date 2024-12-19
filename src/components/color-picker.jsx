@@ -9,6 +9,7 @@ export default function ColorPicker({ data, setData }) {
       {colors.map((c) => (
         <button
           key={c}
+          type="button"
           className={`color ${color === c ? "active" : ""}`}
           onClick={() => setData((prev) => ({ ...prev, color: c }))}
         >
