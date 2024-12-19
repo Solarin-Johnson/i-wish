@@ -1,47 +1,64 @@
 import { useState } from "react";
 import Alert from "../components/Alert";
+import "./layout.scss";
+import { handleInputChange } from "../utils";
+import ColorPicker from "../components/color-picker";
 
 export default function NewWish() {
+  const [data, setData] = useState({
+    wish: "",
+    tag: "",
+    name: "",
+    color: 1,
+  });
   return (
     <div className="new">
       <h1>New Wish</h1>
-      <WishForm />
-      <Alert severity="info" message={"Hi there"} onClose={() => alert("kk")} />
+      <div className="new-content">
+        <WishForm {...{ data, setData }} />
+        <WishPreview {...data} />
+      </div>
     </div>
   );
 }
 
-const WishForm = () => {
-  const [wish, setWish] = useState("");
+const WishForm = ({ data, setData, submit }) => {
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setError(false);
 
-    if (!wish) {
+    if (!data) {
       setError("Wish cannot be empty");
       return;
     }
 
-    try {
-      await createWish(wish);
-      setWish("");
-    } catch (error) {
-      setError("Failed to create wish");
-    }
+    // try {
+    //   await createWish(data);
+    //   setWish("");
+    // } catch (error) {
+    //   setError("Failed to create wish");
+    // }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
+    <form className="wish-form" onSubmit={handleSubmit}>
+      <ColorPicker {...{ data, setData }} />
+      <textarea
         type="text"
         placeholder="Enter your wish"
-        value={wish}
-        onChange={(e) => setWish(e.target.value)}
+        value={data.wish}
+        name="wish"
+        onChange={(e) => handleInputChange(e, data, setData)}
+        rows={6}
       />
       <button type="submit">Submit</button>
-      {error && <div className="error">{error}</div>}
+      {error && <Alert message={error} onClose={() => setError(false)} />}
     </form>
   );
+};
+
+const WishPreview = ({ wish, tag, name, color }) => {
+  return <div className="wish-preview">{wish}</div>;
 };

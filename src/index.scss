@@ -5,6 +5,14 @@
 }
 
 body {
+  margin: 0;
   background-color: rgb(var(--bg-color));
   color: rgb(var(--text-color));
+  anchor-name: --body;
+  font-family: "Inter", serif;
+}
+
+#root {
+  min-height: 100dvh;
+  display: grid;
 }

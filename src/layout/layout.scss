@@ -1,0 +1,52 @@
+:root {
+  --wish-col: repeat(2, 1fr);
+  --wish-marg: 32px;
+}
+
+.new {
+  justify-self: center;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  max-width: 1080px;
+  align-content: center;
+  //   justify-content: center;
+
+  h1 {
+    text-align: center;
+  }
+
+  &-content {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: var(--wish-col);
+    overflow-x: hidden;
+
+    > * {
+      margin: var(--wish-marg);
+      box-sizing: border-box;
+    }
+  }
+}
+
+.wish {
+  &-form {
+    display: grid;
+
+    textarea {
+      font-family: inherit;
+      font-size: clamp(18px, 1vw, 21px);
+      font-weight: 500;
+      padding: 8px;
+      resize: none;
+      outline: none;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --wish-col: repeat(2, 100vw);
+    --wish-marg: 20px;
+  }
+}

@@ -1,36 +1,127 @@
 @use "@/styles/mixin" as *;
 
 .alert {
-  padding: clamp(0.3rem, 1vw, 1rem);
+  position: fixed !important;
+  padding: clamp(0.55rem, 0.8vw, 0.7rem) 12px;
   border-radius: 8px;
-  margin-bottom: 1rem;
-  width: fit-content;
+  margin-bottom: 1.5rem;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  position-anchor: --body;
+  left: anchor(left);
+  right: anchor(right);
+  bottom: anchor(bottom);
+  font-size: clamp(13px, 1.1vw, 14.5px);
+  gap: 8px;
+  font-weight: 400;
+  border: 1px solid rgb(var(--text-color), 0.2);
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2);
+  text-transform: capitalize;
+  animation: 0.4s slideUp;
+  background-color: rgb(var(--bg-color));
+  color: rgb(var(--alert-dark));
+  justify-items: center;
+
+  @include slightFadeBg(#ffffff10);
+
+  &-message {
+    flex: 1;
+  }
 
   button {
     @include resetDefault();
+    display: flex;
+    width: 20px;
+    margin-left: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: rgb(var(--text-color), 0.15);
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include pressFeedback();
   }
+}
 
-  &-success {
-    background-color: rgb(var(--accent-100));
-    color: rgb(var(--accent-1));
-    border: 1px solid #ffffff60;
-  }
+.color-picker {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  padding: 3px;
+  box-sizing: border-box;
+  gap: 12px;
+  margin-bottom: 16px;
 
-  &-error {
-    background-color: rgb(var(--accent-200));
-    color: rgb(var(--accent-2));
-    border: 1px solid #ffffff60;
-  }
+  > button {
+    border-radius: 50%;
+    outline: none;
+    aspect-ratio: 1;
+    width: clamp(42px, 5vw, 50px);
+    border: none;
+    display: flex;
+    padding: 0;
+    background-color: rgb(var(--color, 90, 90, 90));
+    border: 1.5px solid rgb(var(--text-color), 0.5);
+    cursor: pointer;
 
-  &-warning {
-    background-color: rgb(var(--accent-300));
-    color: rgb(var(--accent-3));
-    border: 1px solid #ffffff60;
-  }
+    div {
+      border-radius: 50%;
+      display: grid;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      color: #ffffff;
+      backdrop-filter: saturate(200%);
 
-  &-info {
-    background-color: rgb(var(--accent-400));
-    color: rgb(var(--accent-4));
-    border: 1px solid #ffffff60;
+      svg {
+        position: absolute;
+        display: flex;
+        justify-self: end;
+        transform: translate(2.5px, -2.5px);
+        z-index: 1;
+        background-color: rgb(var(--text-color));
+        padding: 2px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        color: rgb(var(--bg-color));
+
+        > * {
+          transform-origin: center;
+          scale: 0.8;
+        }
+      }
+    }
+
+    &:nth-child(2) {
+      --color: var(--accent-100);
+    }
+    &:nth-child(3) {
+      --color: var(--accent-200);
+    }
+    &:nth-child(4) {
+      --color: var(--accent-300);
+    }
+    &:nth-child(5) {
+      --color: var(--accent-400);
+    }
+    &:nth-child(6) {
+      background-color: rgb(250, 250, 250);
+    }
+
+    &:focus-visible {
+      border-color: rgb(var(--text-color), 1);
+      div {
+        @include slightFadeBg(#00000030);
+        &:before {
+          z-index: 1;
+        }
+      }
+    }
+
+    &.active {
+      border-color: rgb(var(--text-color), 1);
+    }
   }
 }

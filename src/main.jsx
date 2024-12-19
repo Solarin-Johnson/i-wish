@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
+import "@/styles/keyframes.scss";
 import "./colors.scss";
 import "./index.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";

@@ -2,19 +2,23 @@
 
 :root {
   color-scheme: light dark;
-  --accent-1: 21, 87, 36;
-  --accent-2: 114, 28, 36;
-  --accent-3: 133, 100, 4;
-  --accent-4: 0, 64, 133;
+  --accent-1: 133, 100, 4;
+  --accent-2: 21, 87, 36;
+  --accent-3: 0, 64, 133;
+  --accent-4: 114, 28, 36;
   --accent-100: 255, 238, 186;
   --accent-200: 195, 230, 203;
   --accent-300: 184, 218, 255;
   --accent-400: 245, 198, 203;
+  --primary-color: 0, 122, 123;
+
+  //   background-color: rgb(var(--accent-400));
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-color: 24, 24, 24;
+    --fg-color: 56, 56, 56;
     --text-color: 244, 236, 222;
   }
 }
@@ -22,6 +26,7 @@
 @media (prefers-color-scheme: light) {
   :root {
     --bg-color: 255, 255, 255;
+    --fg-color: 100, 100, 00;
     --text-color: 0, 0, 0;
   }
 }
