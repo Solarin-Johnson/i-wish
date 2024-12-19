@@ -3,7 +3,7 @@ import "./ui.scss";
 
 export default function ColorPicker({ data, setData }) {
   const { color } = data;
-  const colors = Array.from({ length: 6 }, (_, i) => i + 1);
+  const colors = Array.from({ length: 6 }, (_, i) => i);
   return (
     <div className="color-picker">
       {colors.map((c) => (

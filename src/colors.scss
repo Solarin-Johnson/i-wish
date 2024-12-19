@@ -2,14 +2,20 @@
 
 :root {
   color-scheme: light dark;
+  --text-0: 255, 255, 255;
+  --accent-0: 244, 236, 222;
+  --accent-1: 0, 0, 0;
   --accent-1: 133, 100, 4;
   --accent-2: 21, 87, 36;
   --accent-3: 0, 64, 133;
   --accent-4: 114, 28, 36;
+  --accent-5: 46, 49, 53;
+  --accent-000: 40, 40, 40;
   --accent-100: 255, 238, 186;
   --accent-200: 195, 230, 203;
   --accent-300: 184, 218, 255;
   --accent-400: 245, 198, 203;
+  --accent-500: 244, 236, 222;
   --primary-color: 0, 122, 123;
 
   //   background-color: rgb(var(--accent-400));
