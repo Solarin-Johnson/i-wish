@@ -1,0 +1,36 @@
+@use "@/styles/mixin" as *;
+
+.alert {
+  padding: clamp(0.3rem, 1vw, 1rem);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  width: fit-content;
+
+  button {
+    @include resetDefault();
+  }
+
+  &-success {
+    background-color: rgb(var(--accent-100));
+    color: rgb(var(--accent-1));
+    border: 1px solid #ffffff60;
+  }
+
+  &-error {
+    background-color: rgb(var(--accent-200));
+    color: rgb(var(--accent-2));
+    border: 1px solid #ffffff60;
+  }
+
+  &-warning {
+    background-color: rgb(var(--accent-300));
+    color: rgb(var(--accent-3));
+    border: 1px solid #ffffff60;
+  }
+
+  &-info {
+    background-color: rgb(var(--accent-400));
+    color: rgb(var(--accent-4));
+    border: 1px solid #ffffff60;
+  }
+}

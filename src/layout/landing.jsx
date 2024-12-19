@@ -1,7 +1,9 @@
+import { Outlet } from "react-router-dom";
+
 export default function LandingLayout() {
   return (
-    <>
-      <div>Landing layout</div>
-    </>
+    <div className="container">
+      <Outlet />
+    </div>
   );
 }
