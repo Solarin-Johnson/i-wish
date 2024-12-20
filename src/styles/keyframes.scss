@@ -56,6 +56,37 @@
   }
 }
 
+@keyframes nav-entering {
+  0% {
+    width: 58px;
+    opacity: 0;
+  }
+  25% {
+    width: 58px;
+    scale: 1;
+    opacity: 1;
+  }
+  36% {
+    width: 58px;
+    scale: 1;
+  }
+  100% {
+    width: var(--nav-width);
+    scale: 1;
+    opacity: 1;
+  }
+}
+
+@keyframes nav-menu-entering {
+  0% {
+    position: relative;
+  }
+  100% {
+    position: relative;
+    opacity: 1;
+  }
+}
+
 @media screen and (max-width: 698px) {
   @keyframes PopOverReveal {
     from {

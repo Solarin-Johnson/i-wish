@@ -2,6 +2,7 @@
 
 :root {
   color-scheme: light dark;
+  overflow-y: scroll;
 }
 
 body {
@@ -20,4 +21,17 @@ body {
   min-height: 100dvh;
   display: grid;
   background-color: inherit;
+}
+
+.container {
+  display: grid;
+  padding-top: 75px;
+  min-height: 700px;
+}
+
+@media screen and (max-width: 540px) {
+  .container {
+    padding: 30px 0;
+    min-height: 0;
+  }
 }

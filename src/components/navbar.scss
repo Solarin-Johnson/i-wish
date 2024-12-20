@@ -1,0 +1,55 @@
+@use "@/styles/mixin" as *;
+
+:root {
+  --nav-width: 350px;
+  --nav-b-rad: 10rem;
+}
+
+nav {
+  position: fixed !important;
+  top: clamp(20px, 5vw, 50px);
+  justify-self: center;
+  background-color: rgba(var(--bg-color), 0.9);
+  padding: 9px;
+  border-radius: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  max-width: 350px;
+  z-index: 10;
+  scale: 0;
+  backdrop-filter: blur(20px);
+  animation: nav-entering 1s ease-in-out 0.1s forwards;
+  width: 58px;
+  overflow: hidden;
+  @include slightFadeBg(rgb(var(--text-color), 0.08));
+
+  .menu {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    opacity: 0;
+    justify-content: end;
+    transform-origin: center;
+    animation: nav-menu-entering 0.3s ease-in-out 0.8s forwards;
+
+    a {
+      color: inherit;
+      background-color: rgba(var(--text-color), 0.1);
+      width: 40px;
+      display: grid;
+      place-items: center;
+      aspect-ratio: 1;
+      border-radius: 10rem;
+      @include pressFeedback();
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --nav-width: 90%;
+    //   --nav-b-rad: 10rem;
+  }
+}

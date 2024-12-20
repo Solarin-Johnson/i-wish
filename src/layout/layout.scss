@@ -23,8 +23,8 @@
   h1 {
     text-align: center;
     margin: 6px 0;
-    font-size: clamp(32px, 2.5vw, 40px);
-    font-weight: 650;
+    font-size: clamp(32px, 2.9vw, 40px);
+    font-weight: 600;
   }
 
   &-content {
@@ -34,7 +34,7 @@
     overflow-x: auto;
     overflow-y: hidden;
     align-content: center;
-    padding: 28px 0;
+    padding: 24px 0;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
 
@@ -42,8 +42,8 @@
     mask-image: linear-gradient(
       to bottom,
       transparent,
-      #000000 6%,
-      #000000 96%,
+      #000000 4%,
+      #000000 97%,
       transparent 100%
     );
     @include hideScroll();
