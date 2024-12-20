@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { setVar } from "../utils";
 import "./ui.scss";
 import { Ribbon } from "lucide-react";
@@ -40,7 +40,11 @@ const WishCard = ({ index, ex, max, hide, tag, wish, color, name }) => {
 
 export const WishCardFull = ({ tag, wish, color, name }) => {
   const containerRef = useRef(null);
-  const { setDownload } = useUser();
+  const { setDownload, setMsg } = useUser();
+
+  useLayoutEffect(() => {
+    setMsg("Downloading your wish card...");
+  }, []);
 
   useEffect(() => {
     const captureScreen = async () => {
@@ -73,6 +77,12 @@ export const WishCardFull = ({ tag, wish, color, name }) => {
           // alert("Your wish has been downloaded!");
         }).then(() => {
           setDownload(false);
+          setTimeout(() => {
+            setMsg(false);
+            setTimeout(() => {
+              setMsg("Your wish has been downloaded!");
+            }, 0);
+          }, 1000);
         });
       }
     };

@@ -16,7 +16,7 @@ export default function NewWish() {
     name: "Anonymous",
     color: 1,
   });
-  const [error, setError] = useState("");
+  const { msg, setMsg } = useUser();
 
   // const [preview, setPreview] = useState(false);
 
@@ -69,11 +69,11 @@ export default function NewWish() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(false);
+    setMsg(false);
 
     if (data.wish.length === 0) {
       const clean = contentRef.current;
-      setError("Wish cannot be empty");
+      setMsg("Wish cannot be empty");
       if (clean) {
         clean.querySelector("textarea").focus();
       }
@@ -84,7 +84,7 @@ export default function NewWish() {
       await submit(data);
       setWish({ wish: "", tag: "wish", name: "Anonymous", color: 1 });
     } catch (error) {
-      setError("Failed to create wish");
+      setMsg("Failed to create wish");
     }
   };
 
@@ -92,15 +92,14 @@ export default function NewWish() {
     <div className="new">
       <h1>New Wish</h1>
       <form className="new-content" ref={contentRef} onSubmit={handleSubmit}>
-        <WishForm {...{ error, setError, data, setData, preview }} />
+        <WishForm {...{ msg, setMsg, data, setData, preview }} />
         <WishPreview {...{ data, setData, goBack }} />
       </form>
-      {error && <Alert message={error} onClose={() => setError(false)} />}
     </div>
   );
 }
 
-const WishForm = ({ error, setError, data, setData, preview, submit }) => {
+const WishForm = ({ msgS, etMsg, data, setData, preview, submit }) => {
   return (
     <div className="wish-form">
       <ColorPicker {...{ data, setData }} />
