@@ -176,13 +176,15 @@
     --fg: 255, 255, 255;
     --text: 0, 0, 0;
 
+    // align-self: center;
     display: grid;
     color: #000000;
-    // width: 300px;
-    max-width: 95%;
-    aspect-ratio: 4/5;
+    width: 315px;
+    max-width: 90vw;
+    // aspect-ratio: 4/5;
     // box-sizing: border-box;
-    height: 370px;
+    max-height: 385px;
+    height: fit-content;
     box-sizing: border-box;
     padding: 16px;
     background-color: rgb(var(--color-f));
@@ -190,21 +192,25 @@
     border: 2px solid rgb(var(--fg));
     border-radius: 24px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
+    transition: 0.2s ease-in-out, color 0.05s ease-in-out;
     align-content: start;
     justify-items: start;
     row-gap: 20px;
-    grid-template-rows: auto 1fr 50px;
+    grid-template-rows: auto 1fr auto;
+
+    * {
+      transition: inherit;
+    }
 
     &.hide {
       opacity: 0;
     }
 
     &-tag {
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 500;
       color: rgba(var(--text), 0.7);
-      padding: 5px 14px;
+      padding: 5px 12px;
       border-radius: 10rem;
       background-color: rgb(var(--color-s));
       color: rgb(var(--color-f));
@@ -221,12 +227,16 @@
       color: #000;
       white-space: pre-wrap;
       max-height: 100%;
-      // overflow: hidden;
-      word-spacing: 1.5px;
+      overflow-y: hidden;
+      padding: 0 1px;
+      box-sizing: border-box;
+      // overflow-x: visible;
+      word-spacing: 1px;
       color: rgb(var(--color-t));
     }
 
     &-footer {
+      padding-top: 10px;
       align-self: last baseline;
       display: grid;
       column-gap: 8px;
@@ -236,7 +246,7 @@
     &-thumb {
       // border: 2px solid rgb(var(--fg));
       background-color: rgb(var(--color-s), 0.9);
-      width: 32px;
+      width: 34px;
       aspect-ratio: 1;
       border-radius: 50%;
       display: grid;
@@ -248,9 +258,9 @@
       }
     }
     &-author {
-      color: rgba(var(--color-t, 0, 0, 0), 0.7);
-      font-weight: 510;
-      font-size: 16px;
+      color: rgba(var(--color-t, 0, 0, 0), 0.8);
+      font-weight: 500;
+      font-size: 15px;
     }
   }
 
@@ -258,7 +268,7 @@
     &-container {
       overflow: hidden;
       background-image: linear-gradient(
-        45deg,
+        10deg,
         rgb(var(--color-s)) 0%,
         rgb(var(--color-f)) 100%
       );
@@ -272,13 +282,29 @@
       @include slightFadeBg(rgb(var(--bg-color), 0.3));
 
       &::before {
+        background-color: rgb(var(--color-b)) !important;
         z-index: 0;
-        filter: blur(200px);
+        backdrop-filter: blur(150px);
       }
 
       .wish-card {
-        z-index: 2;
-        max-width: 330px;
+        position: relative;
+        z-index: 10;
+        width: 315px;
+        height: fit-content !important;
+        aspect-ratio: unset;
+        max-height: 385px;
+      }
+      .author {
+        z-index: 10;
+        position: absolute;
+        bottom: 28px;
+        color: rgb(var(--color-f));
+        color: rgb(var(--color-t));
+        filter: contrast(1.5);
+        font-weight: 600;
+        font-family: "Caveat";
+        font-size: 20px;
       }
     }
   }

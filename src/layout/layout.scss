@@ -22,7 +22,9 @@
 
   h1 {
     text-align: center;
-    margin: 10px 0;
+    margin: 6px 0;
+    font-size: clamp(32px, 2.5vw, 45px);
+    font-weight: 650;
   }
 
   &-content {
@@ -32,7 +34,7 @@
     overflow-x: auto;
     overflow-y: hidden;
     align-content: center;
-    padding: 36px 0;
+    padding: 28px 0;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
 
@@ -93,7 +95,7 @@
       margin-top: 7px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       font-size: 15px;
 
       input {
@@ -101,7 +103,7 @@
         width: 100%;
         background-color: rgba(var(--text-color), 0.06);
         padding: 10px;
-        border-radius: 10px;
+        border-radius: 8px;
         font-weight: 400;
       }
     }
@@ -112,7 +114,8 @@
     align-content: start;
 
     row-gap: 32px;
-    grid-template-rows: 1fr auto;
+    // grid-template-rows: 1fr auto;
+    align-content: center;
 
     > * {
       justify-self: center;
@@ -178,6 +181,11 @@
 }
 
 .pop-over {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+
   &-container {
     display: grid;
     position: fixed;
@@ -192,10 +200,6 @@
     outline: none;
     z-index: -1;
   }
-  display: grid;
-  justify-content: center;
-  justify-items: center;
-  align-content: center;
 }
 
 @media screen and (max-width: 768px) {

@@ -10,6 +10,7 @@ const WishCard = ({ index, ex, max, hide, tag, wish, color, name }) => {
     setVar("--color-s", `var(--accent-${color})`);
     setVar("--color-f", `var(--accent-${color}00)`);
     setVar("--color-t", `var(--text-${color})`);
+    setVar("--color-b", `var(--card-bg-${color})`);
   }, [color]);
 
   return (
@@ -57,7 +58,7 @@ export const WishCardFull = ({ tag, wish, color, name }) => {
             const url = URL.createObjectURL(blob);
             const link = document.createElement("a");
             link.href = url;
-            link.download = "wish-card.jpeg";
+            link.download = `wish-card-${name}.jpeg`;
             link.click();
             URL.revokeObjectURL(url);
             resolve();
@@ -79,6 +80,7 @@ export const WishCardFull = ({ tag, wish, color, name }) => {
   return (
     <div className="wish-card-container" ref={containerRef}>
       <WishCard {...{ tag, wish, color, name }} />
+      <div className="author">Built by @dotjs</div>
     </div>
   );
 };
