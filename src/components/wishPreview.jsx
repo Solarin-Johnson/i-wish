@@ -57,12 +57,12 @@ export const WishCardFull = ({ tag, wish, color, name }) => {
             const url = URL.createObjectURL(blob);
             const link = document.createElement("a");
             link.href = url;
-            link.download = "wish-card.png";
+            link.download = "wish-card.jpeg";
             link.click();
             URL.revokeObjectURL(url);
             resolve();
-          }, "image/png");
-          alert("Your wish has been downloaded!");
+          }, "image/jpeg");
+          // alert("Your wish has been downloaded!");
         }).then(() => {
           setDownload(false);
         });
