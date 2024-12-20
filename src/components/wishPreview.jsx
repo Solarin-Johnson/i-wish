@@ -44,6 +44,13 @@ export const WishCardFull = ({ tag, wish, color, name }) => {
 
   useEffect(() => {
     const captureScreen = async () => {
+      let token;
+      try {
+        token = crypto.randomUUID().toString().slice(0, 6).padStart(6, "0");
+      } catch (error) {
+        token = Math.random().toString(36).substring(2, 8);
+      }
+
       const clean = containerRef.current;
       if (clean) {
         const canvas = await html2canvas(clean, {
@@ -58,7 +65,7 @@ export const WishCardFull = ({ tag, wish, color, name }) => {
             const url = URL.createObjectURL(blob);
             const link = document.createElement("a");
             link.href = url;
-            link.download = `wish-card-${name}.jpeg`;
+            link.download = `wish-card-${name.toLowerCase()}-${token}.jpeg`;
             link.click();
             URL.revokeObjectURL(url);
             resolve();
