@@ -6,6 +6,7 @@ import ColorPicker from "../components/color-picker";
 import Tags from "../components/tag";
 import WishCard from "../components/wishPreview";
 import { ArrowLeft, Download } from "lucide-react";
+import { useUser } from "../context/UserContext";
 
 export default function NewWish() {
   const contentRef = useRef(null);
@@ -15,12 +16,18 @@ export default function NewWish() {
     name: "Anonymous",
     color: 1,
   });
+  const [error, setError] = useState("");
+
   // const [preview, setPreview] = useState(false);
 
   useLayoutEffect(() => {
     const clean = contentRef.current;
     clean.style.height = clean.firstChild.clientHeight + "px";
     if (!clean) return;
+    clean.scrollTo({
+      left: 0,
+      behavior: "instant",
+    });
     // preview();
   }, []);
 
@@ -64,22 +71,22 @@ export default function NewWish() {
     <div className="new">
       <h1>New Wish</h1>
       <div className="new-content" ref={contentRef}>
-        <WishForm {...{ data, setData, preview }} />
+        <WishForm {...{ error, setError, data, setData, preview }} />
         <WishPreview {...{ data, setData, goBack }} />
       </div>
+      {error && <Alert message={error} onClose={() => setError(false)} />}
     </div>
   );
 }
 
-const WishForm = ({ data, setData, preview, submit }) => {
-  const [error, setError] = useState("");
+const WishForm = ({ error, setError, data, setData, preview, submit }) => {
   const textareaRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(false);
 
-    if (!data.wish) {
+    if (data.wish.length === 0) {
       const clean = textareaRef.current;
       setError("Wish cannot be empty");
       if (clean) {
@@ -88,12 +95,12 @@ const WishForm = ({ data, setData, preview, submit }) => {
       return;
     }
 
-    // try {
-    //   await createWish(data);
-    //   setWish("");
-    // } catch (error) {
-    //   setError("Failed to create wish");
-    // }
+    try {
+      await submit(data);
+      setWish({ wish: "", tag: "wish", name: "Anonymous", color: 1 });
+    } catch (error) {
+      setError("Failed to create wish");
+    }
   };
 
   return (
@@ -128,13 +135,13 @@ const WishForm = ({ data, setData, preview, submit }) => {
         </button>
         <button type="submit">Submit</button>
       </div>
-      {error && <Alert message={error} onClose={() => setError(false)} />}
     </form>
   );
 };
 
 const WishPreview = ({ data, setData, goBack }) => {
   const { wish, tag, name, color } = data;
+  const { setDownload } = useUser();
   return (
     <div className="wish-preview">
       <WishCard {...data} />
@@ -144,7 +151,7 @@ const WishPreview = ({ data, setData, goBack }) => {
           <ArrowLeft size={19} strokeWidth={2.5} />
         </button>
         <button type="submit">Submit</button>
-        <button type="button" onClick={goBack}>
+        <button type="button" onClick={() => setDownload(data)}>
           <Download size={19} strokeWidth={2.5} />
         </button>
       </div>

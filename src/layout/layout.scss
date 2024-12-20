@@ -110,8 +110,7 @@
   &-preview {
     display: grid;
     align-content: start;
-    // justify-content: center;
-    // justify-items: center;
+
     row-gap: 32px;
     grid-template-rows: 1fr auto;
 
@@ -176,6 +175,27 @@
       font-weight: 520;
     }
   }
+}
+
+.pop-over {
+  &-container {
+    display: grid;
+    position: fixed;
+    width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(var(--bg-color));
+    border: none;
+    outline: none;
+    z-index: -1;
+  }
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
 }
 
 @media screen and (max-width: 768px) {

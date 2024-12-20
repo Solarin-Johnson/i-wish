@@ -2,7 +2,7 @@
 
 .alert {
   position: fixed !important;
-  padding: 13px;
+  padding: 13.5px;
   border-radius: 12px;
   margin-bottom: 2rem;
   justify-self: center;
@@ -22,6 +22,7 @@
   background-color: rgb(var(--bg-color));
   color: rgb(var(--alert-dark));
   justify-items: center;
+  z-index: 1000;
 
   @include slightFadeBg(#ffffff10);
 
@@ -178,7 +179,7 @@
     display: grid;
     color: #000000;
     // width: 300px;
-    // max-width: 95%;
+    max-width: 95%;
     aspect-ratio: 4/5;
     // box-sizing: border-box;
     height: 370px;
@@ -214,13 +215,14 @@
       width: 100%;
       display: grid;
       font-weight: 600;
-      line-height: 1.35;
+      line-height: 1.38;
       font-size: 25px;
       font-family: "Caveat", serif;
       color: #000;
       white-space: pre-wrap;
       max-height: 100%;
-      overflow: hidden;
+      // overflow: hidden;
+      word-spacing: 1.5px;
       color: rgb(var(--color-t));
     }
 
@@ -249,6 +251,35 @@
       color: rgba(var(--color-t, 0, 0, 0), 0.7);
       font-weight: 510;
       font-size: 16px;
+    }
+  }
+
+  &-card {
+    &-container {
+      overflow: hidden;
+      background-image: linear-gradient(
+        45deg,
+        rgb(var(--color-s)) 0%,
+        rgb(var(--color-f)) 100%
+      );
+      width: 380px;
+      aspect-ratio: 9/16;
+      height: auto;
+      display: grid;
+      place-content: center;
+      justify-items: center;
+
+      @include slightFadeBg(rgb(var(--bg-color), 0.3));
+
+      &::before {
+        z-index: 0;
+        filter: blur(200px);
+      }
+
+      .wish-card {
+        z-index: 2;
+        max-width: 330px;
+      }
     }
   }
 }
