@@ -12,7 +12,7 @@ const NavBar = () => {
         <Link>
           <Globe size={21} strokeWidth={1.6} />
         </Link>
-        <Link to="/new">
+        <Link to="/new" className="new-wish">
           <span>New Wish</span>
           <PlusCircle size={21} strokeWidth={1.6} />
         </Link>

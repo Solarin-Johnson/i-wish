@@ -1,12 +1,13 @@
 @use "@/styles/mixin" as *;
 
 :root {
-  --nav-width: 350px;
+  --nav-width: 360px;
   --nav-b-rad: 10rem;
 }
 
 nav {
-  position: fixed !important;
+  position: sticky !important;
+  height: fit-content;
   top: clamp(20px, 5vw, 50px);
   justify-self: center;
   background-color: rgba(var(--bg-color), 0.9);
@@ -16,7 +17,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  max-width: 350px;
+  max-width: 360px;
   z-index: 10;
   scale: 0;
   backdrop-filter: blur(20px);
@@ -37,12 +38,26 @@ nav {
     a {
       color: inherit;
       background-color: rgba(var(--text-color), 0.1);
-      width: 40px;
+      width: 45px;
+      height: 45px;
       display: grid;
       place-items: center;
       aspect-ratio: 1;
       border-radius: 10rem;
+      text-decoration: none;
       @include pressFeedback();
+
+      &.new-wish {
+        display: flex;
+        gap: 8px;
+        width: fit-content;
+        padding: 0 12px 0 14px;
+        aspect-ratio: unset !important;
+
+        span {
+          font-size: 14px;
+        }
+      }
     }
   }
 }

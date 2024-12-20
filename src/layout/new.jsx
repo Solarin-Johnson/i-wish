@@ -112,6 +112,7 @@ const WishForm = ({ msgS, etMsg, data, setData, preview, submit }) => {
           onChange={(e) => handleInputChange(e, data, setData)}
           rows={6}
           spellCheck={"true"}
+          maxLength={250}
         />
         <Tags {...{ data, setData }} />
         <div className="author">

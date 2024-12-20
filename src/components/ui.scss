@@ -317,7 +317,8 @@
 .logo {
   display: grid;
   place-content: center;
-  width: 40px;
+  width: 45px;
+  height: 45px;
   background-color: rgba(var(--primary-color), 1);
   aspect-ratio: 1;
   border-radius: 50%;
