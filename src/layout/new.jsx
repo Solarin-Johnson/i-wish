@@ -67,30 +67,15 @@ export default function NewWish() {
     // }, 1000);
   });
 
-  return (
-    <div className="new">
-      <h1>New Wish</h1>
-      <div className="new-content" ref={contentRef}>
-        <WishForm {...{ error, setError, data, setData, preview }} />
-        <WishPreview {...{ data, setData, goBack }} />
-      </div>
-      {error && <Alert message={error} onClose={() => setError(false)} />}
-    </div>
-  );
-}
-
-const WishForm = ({ error, setError, data, setData, preview, submit }) => {
-  const textareaRef = useRef(null);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(false);
 
     if (data.wish.length === 0) {
-      const clean = textareaRef.current;
+      const clean = contentRef.current;
       setError("Wish cannot be empty");
       if (clean) {
-        clean.focus();
+        clean.querySelector("textarea").focus();
       }
       return;
     }
@@ -104,17 +89,30 @@ const WishForm = ({ error, setError, data, setData, preview, submit }) => {
   };
 
   return (
-    <form className="wish-form" onSubmit={handleSubmit}>
+    <div className="new">
+      <h1>New Wish</h1>
+      <form className="new-content" ref={contentRef} onSubmit={handleSubmit}>
+        <WishForm {...{ error, setError, data, setData, preview }} />
+        <WishPreview {...{ data, setData, goBack }} />
+      </form>
+      {error && <Alert message={error} onClose={() => setError(false)} />}
+    </div>
+  );
+}
+
+const WishForm = ({ error, setError, data, setData, preview, submit }) => {
+  return (
+    <div className="wish-form">
       <ColorPicker {...{ data, setData }} />
       <div className="area">
         <textarea
-          ref={textareaRef}
           type="text"
           placeholder="Write your wish here..."
           value={data.wish}
           name="wish"
           onChange={(e) => handleInputChange(e, data, setData)}
           rows={6}
+          spellCheck={"true"}
         />
         <Tags {...{ data, setData }} />
         <div className="author">
@@ -129,32 +127,43 @@ const WishForm = ({ error, setError, data, setData, preview, submit }) => {
           />
         </div>
       </div>
-      <div className="button">
-        <button type="button" onClick={preview}>
-          Preview
-        </button>
-        <button type="submit">Submit</button>
-      </div>
-    </form>
+      <ActionButton {...{ data, preview }} />
+    </div>
   );
 };
 
 const WishPreview = ({ data, setData, goBack }) => {
   const { wish, tag, name, color } = data;
-  const { setDownload } = useUser();
   return (
     <div className="wish-preview">
       <WishCard {...data} />
       <ColorPicker {...{ data, setData }} />
-      <div className="button">
-        <button type="button" onClick={goBack}>
-          <ArrowLeft size={19} strokeWidth={2.5} />
-        </button>
-        <button type="submit">Submit</button>
-        <button type="button" onClick={() => setDownload(data)}>
-          <Download size={19} strokeWidth={2.5} />
-        </button>
-      </div>
+      <ActionButton {...{ goBack, data, download: true }} />
     </div>
   );
 };
+
+export function ActionButton({ preview, goBack, download, data }) {
+  const { setDownload } = useUser();
+
+  return (
+    <div className="button">
+      {goBack && (
+        <button type="button" onClick={goBack}>
+          <ArrowLeft size={19} strokeWidth={2.5} />
+        </button>
+      )}
+      {preview && (
+        <button type="button" onClick={preview}>
+          Preview
+        </button>
+      )}
+      <button type="submit">Submit</button>
+      {download && (
+        <button type="button" onClick={() => setDownload(data)}>
+          <Download size={19} strokeWidth={2.5} />
+        </button>
+      )}
+    </div>
+  );
+}

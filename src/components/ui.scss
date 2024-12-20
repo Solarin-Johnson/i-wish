@@ -226,6 +226,7 @@
       font-family: "Caveat", serif;
       color: #000;
       white-space: pre-wrap;
+      word-break: break-all;
       max-height: 100%;
       overflow-y: hidden;
       padding: 0 1px;
@@ -278,7 +279,7 @@
       display: grid;
       place-content: center;
       justify-items: center;
-
+      color: #fff;
       @include slightFadeBg(rgb(var(--bg-color), 0.3));
 
       &::before {
@@ -300,11 +301,14 @@
         position: absolute;
         bottom: 28px;
         color: rgb(var(--color-f));
-        color: rgb(var(--color-t));
         filter: contrast(1.5);
         font-weight: 600;
         font-family: "Caveat";
         font-size: 20px;
+
+        span {
+          color: rgb(var(--color-t));
+        }
       }
     }
   }

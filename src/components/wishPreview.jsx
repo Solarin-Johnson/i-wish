@@ -30,7 +30,7 @@ const WishCard = ({ index, ex, max, hide, tag, wish, color, name }) => {
       </div>
       <div className="wish-card-footer">
         <div className="wish-card-thumb">
-          <Ribbon size={19} strokeWidth={1.3} />
+          <Ribbon size={18} strokeWidth={1.3} />
         </div>
         <div className="wish-card-author">{name || "Anonymous"}</div>
       </div>
@@ -87,7 +87,9 @@ export const WishCardFull = ({ tag, wish, color, name }) => {
   return (
     <div className="wish-card-container" ref={containerRef}>
       <WishCard {...{ tag, wish, color, name }} />
-      <div className="author">Built by @dotjs</div>
+      <div className="author">
+        <span>Built by @dotjs</span>
+      </div>
     </div>
   );
 };
