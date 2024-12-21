@@ -11,6 +11,7 @@ const NavBar = () => {
       <Logo />
       <div className="menu">
         <Link
+          title="Home"
           to="/"
           className="global-wish"
           id={location.pathname === "/" ? "active" : ""}
@@ -19,6 +20,7 @@ const NavBar = () => {
         </Link>
         <Link
           to="/new"
+          title="New Wish"
           className="new-wish"
           id={location.pathname === "/new" ? "active" : ""}
         >
