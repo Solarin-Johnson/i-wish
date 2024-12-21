@@ -229,6 +229,8 @@
 }
 
 .loader {
+  display: flex;
+  place-items: center;
   svg {
     animation: spin 1s linear infinite;
   }

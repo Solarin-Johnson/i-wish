@@ -65,6 +65,9 @@ export const getDeviceType = () => {
 };
 
 export const shuffler = (array) => {
+  if (!Array.isArray(array)) {
+    return [];
+  }
   const shuffled = array.sort(() => Math.random() - 0.5);
   return shuffled;
 };
