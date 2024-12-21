@@ -16,8 +16,8 @@ export const useScroll = (ref, callback) => {
     const element = ref.current;
 
     if (element) {
-      element.addEventListener("scroll", handleScroll);
-      element.addEventListener("touchmove", handleScroll); // For mobile support
+      element.addEventListener("scroll", handleScroll, { passive: true });
+      element.addEventListener("touchmove", handleScroll, { passive: true }); // For mobile support
     }
 
     return () => {

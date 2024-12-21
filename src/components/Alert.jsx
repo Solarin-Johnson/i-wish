@@ -20,7 +20,7 @@ const Alert = ({ message, onClose = () => {}, severity = "" }) => {
     <div className={alertClasses} role="alert">
       <span className="alert-message">{message}</span>
       {onClose && (
-        <button onClick={onClose} className="alert-close-button">
+        <button title="close" onClick={onClose} className="alert-close-button">
           <X size={13} strokeWidth={2.5} />
         </button>
       )}

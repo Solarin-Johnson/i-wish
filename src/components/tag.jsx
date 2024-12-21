@@ -20,7 +20,7 @@ const Tags = ({ data, setData }) => {
 
 const Tag = ({ text, ...props }) => {
   return (
-    <button type="button" className="tag" {...props}>
+    <button title={text} type="button" className="tag" {...props}>
       <span>{text}</span>
       <Check size={14} strokeWidth={2.5} />
     </button>

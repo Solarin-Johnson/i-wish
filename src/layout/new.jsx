@@ -172,23 +172,27 @@ export function ActionButton({ preview, goBack, download, loading, data }) {
   return (
     <div className="button">
       {goBack && (
-        <button type="button" onClick={goBack}>
+        <button title="Back" type="button" onClick={goBack}>
           <ArrowLeft size={19} strokeWidth={2.5} />
         </button>
       )}
       {preview && (
-        <button type="button" onClick={preview}>
+        <button title="Preview wish" type="button" onClick={preview}>
           Preview
         </button>
       )}
-      <button type="submit" id={loading ? "loading" : ""}>
+      <button title="Post wish" type="submit" id={loading ? "loading" : ""}>
         <div>
           <Loader />
           Submit
         </div>
       </button>
       {download && (
-        <button type="button" onClick={() => setDownload(data)}>
+        <button
+          title="Download"
+          type="button"
+          onClick={() => setDownload(data)}
+        >
           <Download size={19} strokeWidth={2.5} />
         </button>
       )}

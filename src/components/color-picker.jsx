@@ -8,6 +8,7 @@ export default function ColorPicker({ data, setData }) {
     <div className="color-picker">
       {colors.map((c) => (
         <button
+          title="Select color"
           key={c}
           type="button"
           className={`color ${color === c ? "active" : ""}`}
