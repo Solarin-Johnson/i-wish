@@ -153,8 +153,8 @@
         &:nth-child(2) {
           display: var(--preview-display);
         }
-        &:has(svg) {
-          max-width: 50.34px;
+        &:not([type="submit"]) {
+          max-width: 54px;
           border-radius: 50%;
 
           &:focus-visible {
@@ -176,16 +176,32 @@
   gap: 14px;
   width: 100%;
 
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
   button {
     @include resetDefault();
+    overflow: hidden;
     cursor: pointer;
     width: 100%;
-    padding: 14px 12px;
+    height: 54px;
     border-radius: 10px;
     font-size: 15px;
     font-weight: 500;
     color: #ffffff;
     @include pressFeedback();
+
+    span {
+      width: 0;
+      scale: 0;
+      opacity: 0;
+      transform-origin: left center;
+      transition: 0.3s ease;
+    }
 
     &[type="submit"] {
       background-color: rgba(var(--primary-color));
@@ -196,6 +212,25 @@
       color: rgba(var(--bg-color));
       font-weight: 520;
     }
+
+    &#loading {
+      div {
+        @include slightFadeBg(#ffffff50);
+
+        span {
+          width: 24px;
+          scale: 1;
+          opacity: 1;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
+
+.loader {
+  svg {
+    animation: spin 1s linear infinite;
   }
 }
 
@@ -218,6 +253,18 @@
     border: none;
     outline: none;
     z-index: -1;
+  }
+}
+
+.loading {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-content: center;
+
+  svg {
+    width: clamp(32px, 5vw, 50px);
+    height: clamp(32px, 5vw, 50px);
   }
 }
 

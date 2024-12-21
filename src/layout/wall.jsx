@@ -1,13 +1,20 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import WishCard, { WishCardFull } from "../components/wishPreview";
 import "./wall.scss";
-import { initWish, setVar } from "../utils";
+import { setVar, shuffler } from "../utils";
+import { getAllWish } from "../utils/api";
+import { Loader } from "./new";
 
 export default function Wall() {
+  const [data, setData] = useState({ data: [] });
+
+  useLayoutEffect(() => {
+    getAllWish().then(setData);
+  }, []);
   return (
     <div className="wall">
       <WallBanner />
-      <WallContent data={initWish} />
+      <WallContent data={shuffler(data?.data)} />
     </div>
   );
 }
@@ -31,13 +38,19 @@ const WallContent = ({ data }) => {
 
   return (
     <div className="wrapper">
-      <div className="plate">
-        <div className="wall-content">
-          {data.map((wish, index) => (
-            <WallWishCard key={index} index={index} {...wish} />
-          ))}
+      {data.length > 0 ? (
+        <div className="plate">
+          <div className="wall-content">
+            {data.map((wish, index) => (
+              <WallWishCard key={index} index={index} {...wish} />
+            ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="loading">
+          <Loader />
+        </div>
+      )}
     </div>
   );
 };

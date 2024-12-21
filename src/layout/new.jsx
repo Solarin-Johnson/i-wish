@@ -5,9 +5,10 @@ import { handleInputChange, useResize, useScroll } from "../utils";
 import ColorPicker from "../components/color-picker";
 import Tags from "../components/tag";
 import WishCard from "../components/wishPreview";
-import { ArrowLeft, Download } from "lucide-react";
+import { ArrowLeft, Download, LoaderCircle } from "lucide-react";
 import { useUser } from "../context/UserContext";
 import Line from "../styles/icons";
+import { postWish } from "../utils/api";
 
 export default function NewWish() {
   const contentRef = useRef(null);
@@ -19,6 +20,7 @@ export default function NewWish() {
   });
   const { msg, setMsg } = useUser();
   const [width, setWidth] = useState(window.innerWidth);
+  const [loading, setLoading] = useState(false);
 
   const updateHeight = () => {
     const clean = contentRef.current;
@@ -33,8 +35,6 @@ export default function NewWish() {
 
     clean.style.height = `${targetHeight}px`;
   };
-
-  // const [preview, setPreview] = useState(false);
 
   useLayoutEffect(() => {
     const clean = contentRef.current;
@@ -84,12 +84,24 @@ export default function NewWish() {
       return;
     }
 
-    try {
-      await submit(data);
-      setWish({ wish: "", tag: "wish", name: "Anonymous", color: 1 });
-    } catch (error) {
-      setMsg("Failed to create wish");
-    }
+    setLoading(true);
+    postWish(data)
+      .then((response) => {
+        if (response) {
+          setMsg(false);
+          setTimeout(() => {
+            setMsg("Wish submitted successfully");
+            scrollTo("left");
+            setData({ wish: "", tag: "wish", name: "Anonymous", color: 1 });
+          }, 1);
+        }
+      })
+      .catch((error) => {
+        setMsg("Failed to submit wish");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -103,14 +115,14 @@ export default function NewWish() {
         />
       </h1>
       <form className="new-content" ref={contentRef} onSubmit={handleSubmit}>
-        <WishForm {...{ msg, setMsg, data, setData, preview }} />
-        <WishPreview {...{ data, setData, goBack }} />
+        <WishForm {...{ msg, setMsg, data, setData, preview, loading }} />
+        <WishPreview {...{ data, setData, goBack, loading }} />
       </form>
     </div>
   );
 }
 
-const WishForm = ({ msgS, etMsg, data, setData, preview, submit }) => {
+const WishForm = ({ msgS, etMsg, data, setData, preview, loading }) => {
   return (
     <div className="wish-form">
       <ColorPicker {...{ data, setData }} />
@@ -138,23 +150,23 @@ const WishForm = ({ msgS, etMsg, data, setData, preview, submit }) => {
           />
         </div>
       </div>
-      <ActionButton {...{ data, preview }} />
+      <ActionButton {...{ data, preview, loading }} />
     </div>
   );
 };
 
-const WishPreview = ({ data, setData, goBack }) => {
+const WishPreview = ({ data, setData, goBack, loading }) => {
   const { wish, tag, name, color } = data;
   return (
     <div className="wish-preview">
       <WishCard {...data} />
       <ColorPicker {...{ data, setData }} />
-      <ActionButton {...{ goBack, data, download: true }} />
+      <ActionButton {...{ goBack, data, loading, download: true }} />
     </div>
   );
 };
 
-export function ActionButton({ preview, goBack, download, data }) {
+export function ActionButton({ preview, goBack, download, loading, data }) {
   const { setDownload } = useUser();
 
   return (
@@ -169,7 +181,12 @@ export function ActionButton({ preview, goBack, download, data }) {
           Preview
         </button>
       )}
-      <button type="submit">Submit</button>
+      <button type="submit" id={loading ? "loading" : ""}>
+        <div>
+          <Loader />
+          Submit
+        </div>
+      </button>
       {download && (
         <button type="button" onClick={() => setDownload(data)}>
           <Download size={19} strokeWidth={2.5} />
@@ -178,3 +195,11 @@ export function ActionButton({ preview, goBack, download, data }) {
     </div>
   );
 }
+
+export const Loader = ({ children }) => {
+  return (
+    <span className="loader">
+      <LoaderCircle size={23} />
+    </span>
+  );
+};
