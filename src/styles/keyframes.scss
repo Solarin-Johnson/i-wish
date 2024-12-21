@@ -87,6 +87,20 @@
   }
 }
 
+@keyframes CardDrop {
+  from {
+    opacity: 0;
+    scale: 1.03;
+  }
+  50% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
 @media screen and (max-width: 698px) {
   @keyframes PopOverReveal {
     from {

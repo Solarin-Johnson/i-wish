@@ -15,8 +15,11 @@ export default function Wall() {
 const WallBanner = () => {
   return (
     <div className="wall-banner">
-      <h1>Global Wish </h1>
-      <p> Collection of all wishes posted</p>
+      <h1>Global Wish</h1>
+      <p>
+        A collection of heartfelt wishes from around the world {"->"} Explore
+        the joy.
+      </p>
     </div>
   );
 };
@@ -42,6 +45,15 @@ const WallContent = ({ data }) => {
 const WallWishCard = (props) => {
   const cardRef = useRef();
   const { index, ...rest } = props;
+
+  useEffect(() => {
+    const randomRotate = Math.random() * 7 - 3.5; // Random between -3.5 and 3.5 degrees
+    cardRef.current.style.setProperty("--random-rotate", `${randomRotate}deg`);
+    cardRef.current.style.setProperty(
+      "--delay",
+      `${Math.floor(Math.random() * 1000)}ms`
+    );
+  }, []);
 
   return (
     <div className="wall-content-card" key={index} ref={cardRef}>

@@ -1,3 +1,5 @@
+@use "@/styles/mixin" as *;
+
 :root {
   --wall-col: repeat(auto-fit, minmax(280px, 1fr));
   --wall-gap: clamp(16px, 4vw, 32px);
@@ -13,7 +15,7 @@
   grid-template-rows: auto 1fr;
 
   &-banner {
-    padding: clamp(48px, 6vw, 84px) 24px;
+    padding: clamp(54px, 7vw, 100px) 24px;
     display: grid;
     justify-content: center;
     text-align: center;
@@ -28,7 +30,8 @@
       font-size: clamp(30px, 4vw, 40px);
     }
     p {
-      font-size: clamp(14px, 1.9vw, 18px);
+      font-size: clamp(14px, 1.5vw, 18px);
+      line-height: 1.5;
       opacity: 0.8;
     }
   }
@@ -49,7 +52,6 @@
   .plate {
     display: grid;
     box-sizing: border-box;
-    overflow-y: auto;
     max-height: 100%;
     padding: var(--wall-gap);
     scrollbar-color: rgba(var(--text-color), 0.1) transparent;
@@ -80,8 +82,10 @@
 
     &-card {
       overflow: hidden;
+      transform: rotate(var(--random-rotate, 0deg));
       margin-bottom: var(--wall-gap);
-      transform: translate3d(var((--left), 0), calc(var(--row, 0) * 170px), 0);
+      opacity: 0;
+      animation: CardDrop 0.5s ease-out var(--delay) forwards;
     }
 
     .wish {
@@ -116,12 +120,16 @@
   :root {
     --wall-col-count: 1;
 
+    .wrapper {
+      background-color: transparent;
+    }
+
     body[device="mobile"] {
-      --wal-max-h: calc(100dvh - 70px - clamp(20px, 5vw, 40px));
+      // --wal-max-h: calc(100dvh - 70px - clamp(20px, 5vw, 40px));
       --wall-col-count: 1;
       .plate {
-        display: flex !important;
-        scroll-snap-type: none !important;
+        // display: flex !important;
+        overflow-x: auto;
         mask-image: linear-gradient(
           to right,
           transparent,
@@ -131,7 +139,7 @@
         );
 
         > div {
-          width: 86%;
+          // width: 86%;
         }
       }
     }

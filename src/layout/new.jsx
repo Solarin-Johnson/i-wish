@@ -1,12 +1,13 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Alert from "../components/Alert";
 import "./layout.scss";
-import { handleInputChange, useScroll } from "../utils";
+import { handleInputChange, useResize, useScroll } from "../utils";
 import ColorPicker from "../components/color-picker";
 import Tags from "../components/tag";
 import WishCard from "../components/wishPreview";
 import { ArrowLeft, Download } from "lucide-react";
 import { useUser } from "../context/UserContext";
+import Line from "../styles/icons";
 
 export default function NewWish() {
   const contentRef = useRef(null);
@@ -17,6 +18,21 @@ export default function NewWish() {
     color: 1,
   });
   const { msg, setMsg } = useUser();
+  const [width, setWidth] = useState(window.innerWidth);
+
+  const updateHeight = () => {
+    const clean = contentRef.current;
+    if (!clean) return;
+    const currentScroll = clean.scrollLeft;
+    const maxScroll = clean.scrollWidth - clean.clientWidth;
+    const scrollRatio = Math.min(Math.max(currentScroll / maxScroll, 0), 1);
+
+    const startHeight = clean.firstChild.clientHeight;
+    const endHeight = clean.lastChild.clientHeight;
+    const targetHeight = startHeight + (endHeight - startHeight) * scrollRatio;
+
+    clean.style.height = `${targetHeight}px`;
+  };
 
   // const [preview, setPreview] = useState(false);
 
@@ -49,22 +65,10 @@ export default function NewWish() {
   const preview = () => scrollTo("right");
   const goBack = () => scrollTo("left");
 
-  useScroll(contentRef, () => {
-    const clean = contentRef.current;
-    if (!clean) return;
-    const currentScroll = clean.scrollLeft;
-    const maxScroll = clean.scrollWidth - clean.clientWidth;
-    const scrollRatio = Math.min(Math.max(currentScroll / maxScroll, 0), 1);
-
-    const startHeight = clean.firstChild.clientHeight;
-    const endHeight = clean.lastChild.clientHeight;
-    const targetHeight = startHeight + (endHeight - startHeight) * scrollRatio;
-
-    clean.style.height = `${targetHeight}px`;
-
-    // setTimeout(() => {
-    //   setPreview(scrollRatio > 0.6);
-    // }, 1000);
+  useScroll(contentRef, updateHeight);
+  useResize(() => {
+    setWidth(window.innerWidth);
+    updateHeight();
   });
 
   const handleSubmit = async (e) => {
@@ -90,7 +94,14 @@ export default function NewWish() {
 
   return (
     <div className="new">
-      <h1>New Wish</h1>
+      <h1>
+        New Wish
+        <Line
+          style={{
+            scale: `${width > 1440 ? 1.3 : width > 1024 ? 1.2 : 1}`,
+          }}
+        />
+      </h1>
       <form className="new-content" ref={contentRef} onSubmit={handleSubmit}>
         <WishForm {...{ msg, setMsg, data, setData, preview }} />
         <WishPreview {...{ data, setData, goBack }} />
