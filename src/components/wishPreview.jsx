@@ -6,11 +6,12 @@ import html2canvas from "html2canvas";
 import { useUser } from "../context/UserContext";
 
 const WishCard = ({ index, ex, max, hide, tag, wish, color, name }) => {
+  const cardRef = useRef(null);
   useEffect(() => {
-    setVar("--color-s", `var(--accent-${color})`);
-    setVar("--color-f", `var(--accent-${color}00)`);
-    setVar("--color-t", `var(--text-${color})`);
-    setVar("--color-b", `var(--card-bg-${color})`);
+    cardRef.current.style.setProperty("--color-s", `var(--accent-${color})`);
+    cardRef.current.style.setProperty("--color-f", `var(--accent-${color}00)`);
+    cardRef.current.style.setProperty("--color-t", `var(--text-${color})`);
+    cardRef.current.style.setProperty("--color-b", `var(--card-bg-${color})`);
   }, [color]);
 
   return (
@@ -21,6 +22,7 @@ const WishCard = ({ index, ex, max, hide, tag, wish, color, name }) => {
         "--z": index,
         "--rotate": `${index === max - 1 ? 0 : index <= max - 3 ? 8 : 4}deg`,
       }}
+      ref={cardRef}
     >
       <div className="wish-card-tag">{tag}</div>
       <div className="wish-card-body">
@@ -38,12 +40,19 @@ const WishCard = ({ index, ex, max, hide, tag, wish, color, name }) => {
   );
 };
 
-export const WishCardFull = ({ tag, wish, color, name }) => {
+export const WishCardFull = ({
+  tag,
+  wish,
+  color,
+  name,
+  download = true,
+  author = true,
+}) => {
   const containerRef = useRef(null);
   const { setDownload, setMsg } = useUser();
 
   useLayoutEffect(() => {
-    setMsg("Downloading your wish card...");
+    download && setMsg("Downloading your wish card...");
   }, []);
 
   useEffect(() => {
@@ -86,20 +95,28 @@ export const WishCardFull = ({ tag, wish, color, name }) => {
         });
       }
     };
-    captureScreen();
+    download && captureScreen();
   }, [containerRef]);
 
   useEffect(() => {
-    setVar("--color-s", `var(--accent-${color})`);
-    setVar("--color-f", `var(--accent-${color}00)`);
-    setVar("--color-t", `var(--text-${color})`);
+    containerRef.current.style.setProperty(
+      "--color-s",
+      `var(--accent-${color})`
+    );
+    containerRef.current.style.setProperty(
+      "--color-f",
+      `var(--accent-${color}00)`
+    );
+    containerRef.current.style.setProperty("--color-t", `var(--text-${color})`);
   }, [color]);
   return (
     <div className="wish-card-container" ref={containerRef}>
       <WishCard {...{ tag, wish, color, name }} />
-      <div className="author">
-        <span>Built by @dotjs</span>
-      </div>
+      {author && (
+        <div className="author">
+          <span>Built by @dotjs</span>
+        </div>
+      )}
     </div>
   );
 };

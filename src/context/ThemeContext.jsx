@@ -1,4 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
+import { getDeviceType } from "../utils";
 
 const ThemeContext = createContext();
 
@@ -7,6 +8,7 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     document.body.setAttribute("data-theme", theme);
+    document.body.setAttribute("device", getDeviceType());
   }, [theme]);
 
   const toggleTheme = () => {

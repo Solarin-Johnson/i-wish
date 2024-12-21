@@ -10,12 +10,17 @@ import { UserProvider } from "./context/UserContext";
 import LandingLayout from "./layout/landing";
 import { ThemeProvider } from "./context/ThemeContext";
 import NewWish from "./layout/new";
+import Wall from "./layout/wall";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <LandingLayout />,
     children: [
+      {
+        path: "",
+        element: <Wall />,
+      },
       {
         path: "new",
         element: <NewWish />,

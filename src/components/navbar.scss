@@ -10,7 +10,7 @@ nav {
   height: fit-content;
   top: clamp(20px, 5vw, 50px);
   justify-self: center;
-  background-color: rgba(var(--bg-color), 0.9);
+  background-color: rgba(var(--bg-color), 0.85);
   padding: 9px;
   border-radius: 10rem;
   display: flex;
@@ -18,9 +18,9 @@ nav {
   justify-content: space-between;
   box-sizing: border-box;
   max-width: 360px;
-  z-index: 10;
+  z-index: 100;
   scale: 0;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
   animation: nav-entering 1s ease-in-out 0.1s forwards;
   width: 58px;
   overflow: hidden;
