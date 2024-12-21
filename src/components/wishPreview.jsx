@@ -53,6 +53,10 @@ export const WishCardFull = ({
 
   useLayoutEffect(() => {
     download && setMsg("Downloading your wish card...");
+    setVar("--color-s", `var(--accent-${color})`);
+    setVar("--color-f", `var(--accent-${color}00)`);
+    setVar("--color-t", `var(--text-${color})`);
+    setVar("--color-b", `var(--card-bg-${color})`);
   }, []);
 
   useEffect(() => {

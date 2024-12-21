@@ -5,13 +5,13 @@
   --wall-gap: clamp(16px, 4vw, 32px);
   --wall-wish-h: 480px;
   --wall-col-count: 4;
-  // --wal-max-h: calc(100dvh - 70px - clamp(20px, 5vw, 40px));
+  --wal-min-h: calc(100dvh - 70px - clamp(20px, 5vw, 40px));
 }
 
 .wall {
   display: grid;
   align-content: start;
-  max-height: var(--wal-max-h);
+  min-height: var(--wal-min-h);
   grid-template-rows: auto 1fr;
 
   &-banner {
@@ -125,7 +125,6 @@
     }
 
     body[device="mobile"] {
-      // --wal-max-h: calc(100dvh - 70px - clamp(20px, 5vw, 40px));
       --wall-col-count: 1;
       .plate {
         // display: flex !important;
