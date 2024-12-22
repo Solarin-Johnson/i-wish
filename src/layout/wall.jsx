@@ -31,7 +31,7 @@ export default function Wall() {
     <div className="wall">
       <WallBanner />
       <WallContent data={data?.data} count={data?.count} />
-      {countLeft && <WallCountIndicator count={countLeft} />}
+      {countLeft ? <WallCountIndicator count={countLeft} /> : <></>}
     </div>
   );
 }
