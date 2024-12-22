@@ -65,7 +65,7 @@ export default function NewWish() {
   const preview = () => scrollTo("right");
   const goBack = () => scrollTo("left");
 
-  useScroll(contentRef, updateHeight);
+  useScroll(contentRef.current, updateHeight);
   useResize(() => {
     setWidth(window.innerWidth);
     updateHeight();

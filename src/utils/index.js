@@ -13,7 +13,7 @@ export const useScroll = (ref, callback) => {
       callback();
     };
 
-    const element = ref.current;
+    const element = ref;
 
     if (element) {
       element.addEventListener("scroll", handleScroll, { passive: true });
@@ -71,3 +71,15 @@ export const shuffler = (array) => {
   const shuffled = array.sort(() => Math.random() - 0.5);
   return shuffled;
 };
+
+export const mergeRefs =
+  (...refs) =>
+  (node) => {
+    refs.forEach((ref) => {
+      if (typeof ref === "function") {
+        ref(node);
+      } else if (ref) {
+        ref.current = node;
+      }
+    });
+  };
