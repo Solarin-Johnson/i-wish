@@ -193,7 +193,7 @@
     font-size: 15px;
     font-weight: 500;
     color: #ffffff;
-    @include pressFeedback();
+    @include pressFeedback(0.98);
 
     span {
       width: 0;
