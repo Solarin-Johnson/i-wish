@@ -154,7 +154,7 @@
           display: var(--preview-display);
         }
         &:not([type="submit"]) {
-          max-width: 54px;
+          max-width: 48px;
           border-radius: 50%;
 
           &:focus-visible {
@@ -188,7 +188,7 @@
     overflow: hidden;
     cursor: pointer;
     width: 100%;
-    height: 54px;
+    height: 48px;
     border-radius: 10px;
     font-size: 15px;
     font-weight: 500;
