@@ -1,0 +1,33 @@
+{
+  "name": "I Wish",
+  "short_name": "iWish",
+  "description": "A wish application",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#181818",
+  "theme_color": "#007A7B",
+  "icons": [
+    {
+      "src": "i-wish-favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Global Wish",
+      "short_name": "Global",
+      "description": "View global wishes",
+      "url": "/",
+      "icons": [{ "src": "i-wish-favicon.svg", "sizes": "192x192" }]
+    },
+    {
+      "name": "New Wish",
+      "short_name": "New",
+      "description": "Create a new wish",
+      "url": "/new",
+      "icons": [{ "src": "i-wish-favicon.svg", "sizes": "192x192" }]
+    }
+  ]
+}
