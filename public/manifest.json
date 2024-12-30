@@ -1,6 +1,6 @@
 {
   "name": "I-Wish",
-  "short_name": "iWish",
+  "short_name": "I-Wish",
   "description": "A wish application",
   "start_url": "/",
   "display": "standalone",

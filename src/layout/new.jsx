@@ -16,7 +16,7 @@ export default function NewWish() {
     wish: "",
     tag: "wish",
     name: "Anonymous",
-    color: 1,
+    color: Math.random() < 0.2 ? 1 : Math.floor(Math.random() * 4) + 1,
   });
   const { msg, setMsg } = useUser();
   const [width, setWidth] = useState(window.innerWidth);

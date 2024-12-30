@@ -56,6 +56,14 @@
     max-height: 100%;
     padding: var(--wall-gap);
     scrollbar-color: rgba(var(--text-color), 0.1) transparent;
+    mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      #000 10px,
+      #000 calc(100% - 10px),
+      transparent
+    );
+    margin: 1px 0;
 
     > * {
       scroll-snap-align: start;
@@ -65,15 +73,6 @@
     &:hover {
       scrollbar-color: rgba(var(--text-color), 0.2) transparent;
     }
-
-    mask-image: linear-gradient(
-      to bottom,
-      transparent,
-      #000 10px,
-      #000 calc(100% - 10px),
-      transparent
-    );
-    margin: 1px 0;
   }
 
   &-content {
