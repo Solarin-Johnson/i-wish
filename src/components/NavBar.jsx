@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./navbar.scss";
 import Logo from "./Logo";
-import { Globe, PlusCircle } from "lucide-react";
+import { Clock, Globe, PlusCircle } from "lucide-react";
 
 const NavBar = () => {
   const location = useLocation();
@@ -17,6 +17,14 @@ const NavBar = () => {
           id={location.pathname === "/" ? "active" : ""}
         >
           <Globe size={21} strokeWidth={1.6} />
+        </Link>
+        <Link
+          title="Countdown"
+          to="/countdown"
+          className="countdown-icon"
+          id={location.pathname === "/countdown" ? "active" : ""}
+        >
+          <Clock size={21} strokeWidth={1.6} />
         </Link>
         <Link
           to="/new"

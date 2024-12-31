@@ -11,6 +11,7 @@ import LandingLayout from "./layout/landing";
 import { ThemeProvider } from "./context/ThemeContext";
 import NewWish from "./layout/new";
 import Wall from "./layout/wall";
+import Countdown from "./layout/countdown";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "new",
         element: <NewWish />,
+      },
+      {
+        path: "countdown",
+        element: <Countdown />,
       },
     ],
   },

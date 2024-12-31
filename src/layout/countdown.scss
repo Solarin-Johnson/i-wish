@@ -1,0 +1,48 @@
+:root {
+  --countdown-gap: clamp(24px, 5vw, 58px);
+  --countdown-width: clamp(70px, 22vw, 220px);
+}
+
+.countdown {
+  &-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: var(--wal-min-h);
+    justify-self: center;
+  }
+  & {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    // width: 90%;
+    padding: calc(var(--countdown-gap) / 1.5);
+    gap: var(--countdown-gap);
+    border-radius: 5px;
+    // background: rgba(255, 229, 59, 0.8);
+    background: rgba(var(--primary-color));
+    box-shadow: -2px 12px 12px 0px rgba(0, 0, 0, 0.25);
+  }
+  &-item {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    gap: 2px;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    height: clamp(160px, 22vw, 245px);
+    width: var(--countdown-width);
+    background-color: rgb(var(--bg-color));
+    border-radius: 9px;
+    box-shadow: 8px 9px 22px 1px rgba(0, 0, 0, 0.5);
+
+    span {
+      max-width: 100%;
+      font-size: clamp(28px, 6vw, 86px);
+    }
+    p {
+      margin: 0;
+      font-size: clamp(8px, 1.6vw, 17px);
+    }
+  }
+}

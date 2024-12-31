@@ -3,6 +3,8 @@
 :root {
   --nav-width: 360px;
   --nav-b-rad: 10rem;
+  --nav-icon-size: 21px;
+  --nav-size: 45px;
 }
 
 nav {
@@ -38,14 +40,19 @@ nav {
     a {
       color: inherit;
       background-color: rgba(var(--text-color), 0.1);
-      width: 45px;
-      height: 45px;
+      width: var(--nav-size);
+      height: var(--nav-size);
       display: grid;
       place-items: center;
       aspect-ratio: 1;
       border-radius: 10rem;
       text-decoration: none;
       @include pressFeedback();
+
+      svg {
+        width: var(--nav-icon-size);
+        height: var(--nav-icon-size);
+      }
 
       &.new-wish {
         display: flex;
@@ -71,5 +78,12 @@ nav {
   :root {
     --nav-width: 90%;
     //   --nav-b-rad: 10rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  :root {
+    --nav-icon-size: 18px;
+    --nav-size: 36px;
   }
 }
