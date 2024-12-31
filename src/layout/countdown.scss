@@ -30,7 +30,8 @@
     text-align: center;
     justify-content: center;
     flex-direction: column;
-    height: clamp(160px, 22vw, 245px);
+    height: clamp(80px, 22vw, 245px);
+    min-height: fit-content;
     width: var(--countdown-width);
     background-color: rgb(var(--bg-color));
     border-radius: 9px;
