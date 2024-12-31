@@ -30,7 +30,7 @@
     text-align: center;
     justify-content: center;
     flex-direction: column;
-    height: clamp(80px, 22vw, 245px);
+    height: clamp(84px, 22vw, 245px);
     min-height: fit-content;
     width: var(--countdown-width);
     background-color: rgb(var(--bg-color));
@@ -39,11 +39,17 @@
 
     span {
       max-width: 100%;
-      font-size: clamp(29px, 6vw, 86px);
+      font-size: clamp(30px, 6vw, 86px);
     }
     p {
       margin: 0;
       font-size: clamp(8px, 1.6vw, 17px);
     }
+  }
+}
+
+@media screen and (max-width: 540px) {
+  :root {
+    --countdown-width: clamp(70px, 24vw, 220px);
   }
 }
