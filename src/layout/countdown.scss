@@ -1,5 +1,5 @@
 :root {
-  --countdown-gap: clamp(24px, 5vw, 58px);
+  --countdown-gap: clamp(12px, 4vw, 58px);
   --countdown-width: clamp(70px, 22vw, 220px);
 }
 
@@ -39,7 +39,7 @@
 
     span {
       max-width: 100%;
-      font-size: clamp(28px, 6vw, 86px);
+      font-size: clamp(29px, 6vw, 86px);
     }
     p {
       margin: 0;
